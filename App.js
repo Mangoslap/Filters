@@ -142,13 +142,6 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         backgroundColor: "#2898FA"
     },
-    textStyle: {
-        fontFamily: 'Helvetica-Bold',
-    },
-    unselectedText: {
-        color: "#63C5FF",
-        fontFamily: 'Helvetica-Bold',
-    },
     header: {
         flex: 2,
         flexDirection: "row",
@@ -189,10 +182,6 @@ const styles = StyleSheet.create({
     button: {
         padding: 10,
         paddingVertical: 20,
-    },
-    buttonText: {
-        fontFamily: "Helvetica-Bold",
-        fontSize: 20,
     },
     footer: {
         flex: 2,
