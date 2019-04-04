@@ -3,75 +3,118 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 export default class App extends React.Component {
+    
     state = {
-        options: [{
+        clubFilters: [{
             title: "Breweries",
             isSelected: true,
             color: "white",
+            index: 0,
         }, {
             title: "All-Day Brunch",
             isSelected: false,
-            color: "#63C5FF"
+            color: "#63C5FF",
+            index: 1,
         }, {
             title: "Live Music",
             isSelected: false,
-            color: "#63C5FF"
+            color: "#63C5FF",
+            index: 2,
         }, {
             title: "Dancing",
             isSelected: false,
-            color: "#63C5FF"
+            color: "#63C5FF",
+            index: 3,
         }, {
             title: "Cheap Drinks",
             isSelected: false,
-            color: "#63C5FF"
+            color: "#63C5FF",
+            index: 4,
         }, {
             title: "Tallboy Tuesdays",
             isSelected: false,
-            color: "#63C5FF"
-        },
-        //This point on are the indexes for the Brewery Filters
-        {
-            title: "Breweries",
-            isSelected: true,
-            color: "white",
-        }, {
-            title: "All-Day Brunch",
-            isSelected: false,
-            color: "#63C5FF"
-        }, {
-            title: "Live Music",
-            isSelected: false,
-            color: "#63C5FF"
-        }, {
-            title: "Dancing",
-            isSelected: false,
-            color: "#63C5FF"
-        }, {
-            title: "Cheap Drinks",
-            isSelected: false,
-            color: "#63C5FF"
-        }, {
-            title: "Tallboy Tuesdays",
-            isSelected: false,
-            color: "#63C5FF"
+            color: "#63C5FF",
+            index: 5,
+        }],
+
+        brewFilters: [
+            {
+                title: "Breweries",
+                isSelected: true,
+                color: "white",
+                index: 0,
+            }, {
+                title: "All-Day Brunch",
+                isSelected: false,
+                color: "#63C5FF",
+                index: 1,
+            }, {
+                title: "Live Music",
+                isSelected: false,
+                color: "#63C5FF",
+                index: 2,
+            }, {
+                title: "Dancing",
+                isSelected: false,
+                color: "#63C5FF",
+                index: 3,
+            }, {
+                title: "Cheap Drinks",
+                isSelected: false,
+                color: "#63C5FF",
+                index: 4,
+            }, {
+                title: "Tallboy Tuesdays",
+                isSelected: false,
+                color: "#63C5FF",
+                index: 5,
         }]
     }
-
-    buttonTap(index) {
-        var arr = this.state.options;
-        if (arr[index].isSelected) {
-            arr[index].isSelected = false;
-            arr[index].color = "#63C5FF";
+    clubButtonTap(key) {
+        var arr = this.state.clubFilters;
+        if (arr[key.index].isSelected) {
+            arr[key.index].isSelected = false;
+            arr[key.index].color = "#63C5FF";
         }
         else {
-            arr[index].isSelected = true;
-            arr[index].color = "white";
+            arr[key.index].isSelected = true;
+            arr[key.index].color = "white";
         }
         this.setState({ arr });
     }
-
+    renderClubFilters = () => {
+        return (
+            this.state.clubFilters.map(x => (
+                <TouchableOpacity style={styles.button} onPress={() => this.clubButtonTap(x)} key={x.index}>
+                    <Text style={{ fontFamily: "Helvetica-Bold", fontSize: 16, color: x.color }}>{x.title}</Text>
+                </TouchableOpacity>
+                )
+            )
+        )
+    }
+    brewButtonTap(key) {
+        var arr = this.state.brewFilters;
+        if (arr[key.index].isSelected) {
+            arr[key.index].isSelected = false;
+            arr[key.index].color = "#63C5FF";
+        }
+        else {
+            arr[key.index].isSelected = true;
+            arr[key.index].color = "white";
+        }
+        this.setState({ arr });
+    }
+    renderBrewFilters = () => {
+        return (
+            this.state.brewFilters.map(x => (
+                <TouchableOpacity style={styles.button} onPress={() => this.brewButtonTap(x)} key={x.index}>
+                    <Text style={{ fontFamily: "Helvetica-Bold", fontSize: 16, color: x.color }}>{x.title}</Text>
+                </TouchableOpacity>
+                )
+            )
+        )
+    }
     render() {
-        var buttonSize = 16;
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -83,51 +126,13 @@ export default class App extends React.Component {
                     <Text style={styles.title}>Clubs</Text>
                 </View>
                 <View style={styles.clubComp}>
-
-                    <TouchableOpacity style={styles.button} onPress={() => this.buttonTap(0)}>
-                        <Text style={{ fontFamily: "Helvetica-Bold", fontSize: buttonSize, color: this.state.options[0].color }}>{this.state.options[0].title}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => this.buttonTap(1)}>
-                        <Text style={{ fontFamily: "Helvetica-Bold", fontSize: buttonSize, color: this.state.options[1].color }}>{this.state.options[1].title}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => this.buttonTap(2)}>
-                        <Text style={{ fontFamily: "Helvetica-Bold", fontSize: buttonSize, color: this.state.options[2].color }}>{this.state.options[2].title}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => this.buttonTap(3)}>
-                        <Text style={{ fontFamily: "Helvetica-Bold", fontSize: buttonSize, color: this.state.options[3].color }}>{this.state.options[3].title}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => this.buttonTap(4)}>
-                        <Text style={{ fontFamily: "Helvetica-Bold", fontSize: buttonSize, color: this.state.options[4].color }}>{this.state.options[4].title}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => this.buttonTap(5)}>
-                        <Text style={{ fontFamily: "Helvetica-Bold", fontSize: buttonSize, color: this.state.options[5].color }}>{this.state.options[5].title}</Text>
-                    </TouchableOpacity>
-
+                    {this.renderClubFilters()}
                 </View>
                 <View style={styles.brewTitle}>
                     <Text style={styles.title}>Breweries</Text>
                 </View>
                 <View style={styles.brewComp}>
-
-                    <TouchableOpacity style={styles.button} onPress={() => this.buttonTap(6)}>
-                        <Text style={{ fontFamily: "Helvetica-Bold", fontSize: buttonSize, color: this.state.options[6].color }}>{this.state.options[6].title}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => this.buttonTap(7)}>
-                        <Text style={{ fontFamily: "Helvetica-Bold", fontSize: buttonSize, color: this.state.options[7].color }}>{this.state.options[7].title}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => this.buttonTap(8)}>
-                        <Text style={{ fontFamily: "Helvetica-Bold", fontSize: buttonSize, color: this.state.options[8].color }}>{this.state.options[8].title}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => this.buttonTap(9)}>
-                        <Text style={{ fontFamily: "Helvetica-Bold", fontSize: buttonSize, color: this.state.options[9].color }}>{this.state.options[9].title}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => this.buttonTap(10)}>
-                        <Text style={{ fontFamily: "Helvetica-Bold", fontSize: buttonSize, color: this.state.options[10].color }}>{this.state.options[10].title}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => this.buttonTap(11)}>
-                        <Text style={{ fontFamily: "Helvetica-Bold", fontSize: buttonSize, color: this.state.options[11].color }}>{this.state.options[11].title}</Text>
-                    </TouchableOpacity>
-
+                    {this.renderBrewFilters()}
                 </View>
                 <View style={styles.footer}>
                 </View>
