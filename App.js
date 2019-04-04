@@ -70,8 +70,8 @@ export default class App extends React.Component {
                 index: 5,
         }]
     }
-    clubButtonTap(key) {
-        var arr = this.state.clubFilters;
+    buttonTap(key, array) {
+        var arr = array;
         if (arr[key.index].isSelected) {
             arr[key.index].isSelected = false;
             arr[key.index].color = "#63C5FF";
@@ -82,32 +82,10 @@ export default class App extends React.Component {
         }
         this.setState({ arr });
     }
-    renderClubFilters = () => {
+    renderFilters = (array, buttonNum) => {
         return (
-            this.state.clubFilters.map(x => (
-                <TouchableOpacity style={styles.button} onPress={() => this.clubButtonTap(x)} key={x.index}>
-                    <Text style={{ fontFamily: "Helvetica-Bold", fontSize: 16, color: x.color }}>{x.title}</Text>
-                </TouchableOpacity>
-                )
-            )
-        )
-    }
-    brewButtonTap(key) {
-        var arr = this.state.brewFilters;
-        if (arr[key.index].isSelected) {
-            arr[key.index].isSelected = false;
-            arr[key.index].color = "#63C5FF";
-        }
-        else {
-            arr[key.index].isSelected = true;
-            arr[key.index].color = "white";
-        }
-        this.setState({ arr });
-    }
-    renderBrewFilters = () => {
-        return (
-            this.state.brewFilters.map(x => (
-                <TouchableOpacity style={styles.button} onPress={() => this.brewButtonTap(x)} key={x.index}>
+            array.map(x => (
+                <TouchableOpacity style={styles.button} onPress={() => this.buttonTap(x, array)} key={x.index}>
                     <Text style={{ fontFamily: "Helvetica-Bold", fontSize: 16, color: x.color }}>{x.title}</Text>
                 </TouchableOpacity>
                 )
@@ -126,13 +104,13 @@ export default class App extends React.Component {
                     <Text style={styles.title}>Clubs</Text>
                 </View>
                 <View style={styles.clubComp}>
-                    {this.renderClubFilters()}
+                    {this.renderFilters(this.state.clubFilters)}
                 </View>
                 <View style={styles.brewTitle}>
                     <Text style={styles.title}>Breweries</Text>
                 </View>
                 <View style={styles.brewComp}>
-                    {this.renderBrewFilters()}
+                    {this.renderFilters(this.state.brewFilters)}
                 </View>
                 <View style={styles.footer}>
                 </View>
@@ -140,7 +118,6 @@ export default class App extends React.Component {
         );
     }
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
