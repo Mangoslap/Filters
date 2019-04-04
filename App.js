@@ -82,7 +82,7 @@ export default class App extends React.Component {
         }
         this.setState({ arr });
     }
-    renderFilters = (array, buttonNum) => {
+    renderFilters = (array) => {
         return (
             array.map(x => (
                 <TouchableOpacity style={styles.button} onPress={() => this.buttonTap(x, array)} key={x.index}>
